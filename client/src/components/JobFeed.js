@@ -12,7 +12,7 @@ const JobFeed = () => {
       if (filters.skill) params.append('skill', filters.skill);
       if (filters.location) params.append('location', filters.location);
       if (filters.tag) params.append('tag', filters.tag);
-      const res = await fetch(`http://localhost:5000/api/jobs?${params.toString()}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs?${params.toString()}`);
       const data = await res.json();
       setJobs(data);
     };
@@ -27,7 +27,7 @@ const JobFeed = () => {
   const handleApply = async (jobId) => {
     setApplyStatus(s => ({ ...s, [jobId]: 'loading' }));
     const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:5000/api/jobs/${jobId}/apply`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs/${jobId}/apply`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` }
     });

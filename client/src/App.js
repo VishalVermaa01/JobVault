@@ -15,11 +15,13 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
   const [role, setRole] = useState(() => localStorage.getItem('userRole') || '');
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     if (isAuthenticated) {
       const fetchRole = async () => {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:5000/api/profile/me', {
+        const res = await fetch(`${apiUrl}/api/profile/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {
@@ -51,7 +53,7 @@ function App() {
       localStorage.setItem('userRole', r);
       // Save role in backend
       const token = localStorage.getItem('token');
-      await fetch('http://localhost:5000/api/profile/me', {
+      await fetch(`${apiUrl}/api/profile/me`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

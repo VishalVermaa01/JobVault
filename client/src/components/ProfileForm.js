@@ -20,7 +20,7 @@ const ProfileForm = ({ onLogout }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/profile/me', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/profile/me`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
@@ -88,7 +88,7 @@ const ProfileForm = ({ onLogout }) => {
     e.preventDefault();
     setMessage('');
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/profile/me', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/profile/me`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const ProfileForm = ({ onLogout }) => {
     setMessage('Parsing resume...');
     const formData = new FormData();
     formData.append('resume', file);
-    const res = await fetch('http://localhost:5000/api/resume/parse', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/resume/parse`, {
       method: 'POST',
       body: formData
     });

@@ -13,8 +13,8 @@ const AuthForm = ({ onAuthSuccess }) => {
     e.preventDefault();
     setError('');
     const endpoint = isLogin
-      ? 'http://localhost:5000/api/auth/login'
-      : 'http://localhost:5000/api/auth/register';
+      ? `${process.env.REACT_APP_API_URL}/api/auth/login`
+      : `${process.env.REACT_APP_API_URL}/api/auth/register`;
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
